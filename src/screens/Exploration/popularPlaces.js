@@ -7,7 +7,7 @@ const PopularPlaces = () => {
     return (
       <View style={styles.container}>
         <PlaceCard
-          imageSource={require('../../Assets/Images/swat-valley.jpg')}
+          imageSource={require('../../assets/images/swat-valley.jpg')}
           name="Trip Place Name"
           ratings={4.5}
         />
