@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: 'white',
     height: 70,
-    fontSize: 24,
+    fontSize: 25,
     width: '80%',
     alignSelf: 'center',
     textAlign: 'right', // Add this line
