@@ -34,5 +34,6 @@ const style = StyleSheet.create({
     color: "white",
     textAlign: "center",
     alignSelf: "center",
+    alignItems: "center",
   },
 });
