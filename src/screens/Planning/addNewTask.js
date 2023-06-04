@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // import Input from './components/Input.js';
 import Date from './components/date.js';
 import  ActionButton  from '../../components/ActionButton.js';
-import Input from '../../components/InputField.js';
+import Input from './components/InputField.js';
 
 import InputField from './components/time.js';
 const AddNewTask = ({ navigation }) => {

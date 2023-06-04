@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { InputField } from "../../components/InputField";
+import { InputField } from "../Planning/components/InputField";
 import { ActionButton } from "../../components/ActionButton";
 
 const LoginScreen = () => {

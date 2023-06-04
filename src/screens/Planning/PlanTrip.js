@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // import Input from './components/Input.js';
 
 import  ActionButton  from '../../components/ActionButton.js';
-import InputField from '../../components/InputField.js';
+import InputField from './components/InputField.js';
 function New_Trip(){
     return(
         <View> 
