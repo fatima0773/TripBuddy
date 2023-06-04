@@ -1,39 +1,29 @@
 import React from "react";
 import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
 
-export function ActionButton({ text, navigation, screenName }) {
-  const handlePress = () => {
-    navigation.navigate(screenName);
-  };
+export function ActionButton({ text, style, onPress }) {
 
   return (
-    <View style={style.container}>
       <TouchableHighlight
-        onPress={handlePress}
         underlayColor="#1F4B49"
-        style={style.button}
+        style={[styles.button, style]}
+        onPress={onPress}
       >
-        <Text style={style.text}>{text}</Text>
+        <Text style={styles.text}>{text}</Text>
       </TouchableHighlight>
-    </View>
   );
 }
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+const styles = StyleSheet.create({
   button: {
     backgroundColor: "#25605C",
-    width: 302,
+    width: "80%",
     height: 56,
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: 23,
   },
   text: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "600",
     color: "white",
     textAlign: "center",

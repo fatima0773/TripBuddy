@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, StyleSheet } from 'react-native';
 
-export function InputField({ placeholder, text }) {
+export function InputField({ placeholder, text, style, secureTextEntry}) {
   const [inputText, setInputText] = useState(text);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -15,7 +15,7 @@ export function InputField({ placeholder, text }) {
 
   return (
     <TextInput
-      style={[styles.input, isFocused && styles.inputFocused]}
+      style={[styles.input, isFocused && styles.inputFocused, style]}
       placeholder={placeholder}
       placeholderTextColor="#353535"
       value={inputText}
@@ -23,6 +23,7 @@ export function InputField({ placeholder, text }) {
       onChangeText={newText => setInputText(newText)}
       onFocus={handleFocus}
       onBlur={handleBlur}
+      secureTextEntry={secureTextEntry}
     />
   );
 }
@@ -34,9 +35,9 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     paddingLeft: 32,
     borderRadius: 23,
-    fontSize: 16,
+    fontSize: 17,
     height: 44,
-    width: 307,
+    width: "80%",
     alignSelf: 'center',
     fontWeight: 'normal',
   },

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Image, TouchableHighlight, Text, StyleSheet, Dimensions } from 'react-native';
+import auth from '@react-native-firebase/auth'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -133,3 +134,10 @@ const styles = StyleSheet.create({
 });
 
 export default IntroScreen;
+
+/*
+
+1- Navigation for Login and Signup Screen not working again.
+Error: Cannot read property 'navigate' of undefined
+
+*/

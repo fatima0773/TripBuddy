@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import 'react-native-gesture-handler';
-import PopularPlaces from "./src/screens/Exploration/popularPlaces";
+// import PopularPlaces from "./src/screens/Exploration/popularPlaces";
 import { Platform } from 'react-native';
 import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import UserContext from "./src/userContext";
-import ViewAllJournalEntries from "./src/screens/tripJournal/viewAllJournalEntries";
+import RootNavigator from "./src/navigation/rootNavigator";
+import Dashboard from "./src/screens/onBoarding/dashboard";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCvq_2NLOqjKMtcydLjFA9oQDSTZVZGh_s",
@@ -39,8 +40,9 @@ const App = () => {
 
   return (
     <UserContext.Provider value={userId}>
-      <ViewAllJournalEntries />
-      </UserContext.Provider>
+      {/* <RootNavigator/> */}
+      <Dashboard/>
+    </UserContext.Provider>
   )
 }
 
