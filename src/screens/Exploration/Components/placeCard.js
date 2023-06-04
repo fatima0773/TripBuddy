@@ -8,28 +8,93 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {TextInput, Button} from 'react-native-paper';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+import colors from '../../styles/colors';
 
-const PlaceCard = ({ imageSource, name, ratings }) => {
+const PlaceCard = ({imageSource, name, ratings, icon, iconColor}) => {
+  const selectedMode = colors['light'];
+  const styles = StyleSheet.create({
+    card: {
+      borderRadius: 30,
+      backgroundColor: selectedMode.background,
+      marginBottom: 19,
+      width: '97%',
+      elevation: 6,
+      shadowColor: 'black',
+    },
+    gradient: {
+      flex: 1,
+      flexDirection: 'row',
+      borderRadius: 10,
+      overflow: 'hidden',
+    },
+    image: {
+      flexDirection: 'row',
+      width: '100%',
+      height: 210,
+      borderRadius: 30,
+      overflow: 'hidden',
+    },
+    textView: {
+      width: '85%',
+      justifyContent: 'flex-end',
+      padding: 30,
+    },
+    name: {
+      fontSize: 24,
+      fontWeight: '400',
+      color: 'white',
+    },
+    ratings: {
+      color: 'white',
+      fontSize: 24,
+    },
+    seeMoreContainer: {
+      justifyContent: 'center',
+    },
+  });
+
   return (
-    <View style={{ alignItems: 'center' }}>
+    <View style={{alignItems: 'center'}}>
       <View style={styles.card}>
         <ImageBackground source={imageSource} style={styles.image}>
           <LinearGradient
-            colors={['transparent','rgba(0,0,0,0.3)', 'rgba(0,0,0,0.5)' ]}
-            style={styles.gradient}
-          >
+            colors={['transparent', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.6)']}
+            style={styles.gradient}>
             <View style={styles.textView}>
-              <Text style={styles.name}>{name}</Text>
-              <Text style={styles.ratings}>Ratings: {ratings}</Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingBottom: 13,
+                }}>
+                <Feather
+                  name="map-pin"
+                  size={22}
+                  color="white"
+                  style={{paddingRight: 20}}
+                />
+                <Text style={styles.name}>{name}</Text>
+              </View>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <FontAwesome
+                  name={icon}
+                  size={23}
+                  color={iconColor}
+                  style={{paddingRight: 20}}
+                />
+                <Text style={styles.ratings}>{ratings}</Text>
+              </View>
             </View>
             <TouchableOpacity style={styles.seeMoreContainer}>
-              <Icon
+              <MaterialIcons
                 name="keyboard-arrow-right"
                 size={45}
                 color="white"
-                style={{ padding: 10 }}
+                style={{padding: 10}}
               />
             </TouchableOpacity>
           </LinearGradient>
@@ -38,45 +103,5 @@ const PlaceCard = ({ imageSource, name, ratings }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    borderRadius: 15,
-    backgroundColor: 'whitesmoke',
-    marginBottom: 16,
-    width: '99%',
-  },
-  gradient: {
-    flex: 1,
-    flexDirection: "row",
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  image: {
-    flexDirection: 'row',
-    width: '100%',
-    height: 230,
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  textView: {
-    width: '85%',
-    justifyContent: 'flex-end',
-    padding: 30,
-  },
-  name: {
-    fontSize: 23,
-    fontWeight: '400',
-    paddingBottom: 10,
-    color: 'white',
-  },
-  ratings: {
-    color: 'white',
-    fontSize: 23,
-  },
-  seeMoreContainer: {
-    justifyContent: 'center',
-  },
-});
 
 export default PlaceCard;

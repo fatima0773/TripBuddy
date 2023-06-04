@@ -13,8 +13,22 @@ import ProfileComponent from '../../components/profileComponent';
 import Search from '../../components/search';
 
 const PopularPlaces = () => {
+<<<<<<< HEAD
   const [text, setText] = React.useState('');
 
+=======
+    return (
+      <View style={styles.container}>
+        <PlaceCard
+          imageSource={require('../../assets/images/swat-valley.jpg')}
+          name="Trip Place Name"
+          ratings={4.5}
+        />
+      </View>
+    );
+  };
+  
+>>>>>>> a49eb2b22ac9dc67abe0ca853d524d3311c4ccc3
   const styles = StyleSheet.create({
     container: {
       flex: 1,

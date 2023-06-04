@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
+import {  Text, TouchableHighlight, StyleSheet } from "react-native";
 
 export function ActionButton({ text, style, onPress }) {
 
@@ -16,6 +16,7 @@ export function ActionButton({ text, style, onPress }) {
 
 const styles = StyleSheet.create({
   button: {
+    marginTop: 20,
     backgroundColor: "#25605C",
     width: "80%",
     height: 56,
@@ -27,5 +28,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "white",
     textAlign: "center",
+    alignSelf: "center",
+    alignItems: "center",
   },
 });
