@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
+import {  Text, TouchableHighlight, StyleSheet } from "react-native";
 
 export default function ActionButton({ text, navigation, screenName}) {
   const handlePress = () => {

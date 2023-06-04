@@ -24,7 +24,7 @@ const AddNewTask = ({ navigation }) => {
     <Input placeholder="Add task title" isLarge={false}/>
     <Input placeholder="Add task title" isLarge={true} name={"optional"}/>
     <InputField placeholder="12:00PM" clockk={true}/>
-    <ActionButton text="Save"/>
+    <ActionButton text="Savee"/>
 
     
     </View>

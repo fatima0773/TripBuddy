@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import TimePicker from 'react-native-simple-time-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
