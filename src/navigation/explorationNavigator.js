@@ -6,8 +6,6 @@ import DestinationDetails from '../screens/Exploration/destinationDetails';
 import ProfileScreen from '../screens/onBoarding/profileScreen';
 import New_Trip from '../screens/Planning/PlanTrip';
 
-
-
 const Stack = createNativeStackNavigator();
 
 function Exploration() {

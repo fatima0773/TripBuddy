@@ -26,6 +26,7 @@ const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState(null);
   const [contact, setContact] = useState(null);
   const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword]  = useState(null);
   const [showError, setShowError] = useState(false)
 
 
@@ -183,7 +184,8 @@ const SignupScreen = ({navigation}) => {
       <View style={styles.passwordContainer}>
         <InputField
           placeholder="Confirm Password"
-          text=""
+          text={confirmPassword}
+          onChangeText={setConfirmPassword}
           secureTextEntry={!isConfirmPasswordVisible}
         />
         <TouchableOpacity

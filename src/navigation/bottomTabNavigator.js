@@ -8,6 +8,8 @@ import OcticonsIcon from 'react-native-vector-icons/Octicons' //home list-unorde
 import FoundationIcon from 'react-native-vector-icons/Foundation' // mountains
 import IoniconsIcon from 'react-native-vector-icons/Ionicons' //journal-outline
 import Exploration from './explorationNavigator';
+import UserDashboard from '../screens/dashboard/userDashboard';
+import YourChecklist from '../screens/checklist/yourChecklist';
 
 const Tab = createBottomTabNavigator();
 
@@ -80,7 +82,7 @@ const BottomTabNavigator = ({ navigation, route }) => {
               <OcticonsIcon name="home" color={'#ADADAD'} size={25} />
             );
 					}
-					else if (route.name === 'Checklist') {
+					else if (route.name === 'Your Checklist') {
               return focused ? (
 							<FocusedTabBarIcon
 								tabName={4}
@@ -119,8 +121,7 @@ const BottomTabNavigator = ({ navigation, route }) => {
     >
       <Tab.Screen
         name="Exploration"
-        component={Exploration
-        }
+        component={Exploration}
         options={{ headerShown: false }}
       />
       <Tab.Screen
@@ -130,12 +131,12 @@ const BottomTabNavigator = ({ navigation, route }) => {
       />
       <Tab.Screen
         name="Home"
-        component={ViewAllJournalEntries}
+        component={UserDashboard}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Checklist"
-        component={ViewAllJournalEntries}
+        name="Your Checklist"
+        component={YourChecklist}
         options={{ headerShown: false }}
 			/>
 			<Tab.Screen

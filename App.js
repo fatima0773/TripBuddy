@@ -7,7 +7,7 @@ import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import UserContext from "./src/userContext";
 import RootNavigator from "./src/navigation/rootNavigator";
-import Dashboard from "./src/screens/onBoarding/dashboard";
+import Dashboard from "./src/screens/dashboard/userDashboard";
 import ViewAllJournalEntries from "./src/screens/tripJournal/viewAllJournalEntries";
 import ViewJournalEntry from "./src/screens/tripJournal/viewJournalEntry";
 import ProfileScreen from "./src/screens/onBoarding/profileScreen";

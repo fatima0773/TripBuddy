@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import MaterialIcons2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ProfileComponent = ({ name, imageSource }) => {
+const ProfileComponent = ({ name, imageSource, handlePress }) => {
   const styles = StyleSheet.create({
     account: {
       flexDirection: 'row',
@@ -25,7 +25,7 @@ const ProfileComponent = ({ name, imageSource }) => {
   return (
     <View style={styles.account}>
       {imageSource === null ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePress}>
           <MaterialIcons2
             name="account-circle-outline"
             size={40}
@@ -34,7 +34,7 @@ const ProfileComponent = ({ name, imageSource }) => {
           />
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePress}>
           <Image source={imageSource} style={styles.image} />
         </TouchableOpacity>
       )}
