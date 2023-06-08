@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { ActionButton } from '../../components/ActionButton';
-import { InputField } from '../../components/InputField';
+import { InputField } from './components/InputField';
+import auth from '@react-native-firebase/auth';
 
 const LoginScreen = ({ navigation }) => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [showError, setShowError] = useState(false);
 
   const handleSignUpPress = () => {
     navigation.navigate('Signup Screen');
@@ -19,6 +23,34 @@ const LoginScreen = ({ navigation }) => {
     setPasswordVisible(!isPasswordVisible);
   };
 
+  const checkError = () => {
+    if (name === null || email === null || filePath === null || contact === null || password === null) {
+      setShowError(true)
+      console.log(showError)
+    }
+    else {
+      setShowError(false)
+      handleSignIn()
+    }
+  }
+
+  const handleSignIn = async () => {
+    try {
+      const userCredential = await auth().signInWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log('User logged in successfully!', userCredential.user);
+      navigation.navigate('Tab')
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  };
+
+  useEffect(() => {
+  }, [showError])
+
+
   return (
     <View style={styles.container}>
       {/* Head */}
@@ -28,15 +60,20 @@ const LoginScreen = ({ navigation }) => {
       {/* Your name input field */}
       <InputField
         placeholder="Your email"
-        text=""
-        style={{ marginBottom: 15}}
+        style={{ marginBottom: 15 }}
+        onChangeText={setEmail}
+        text={email}
       />
 
       {/* Password input field */}
       <View style={styles.passwordContainer}>
+        {
+          showError === true ? (<Text style={{ color: 'red', marginVertical: 10, fontFamily: 'Poppins-Regular' }}>Please fill out all the required fields</Text>) : null
+        }
         <InputField
           placeholder="Your Password"
-          text=""
+          onChangeText={setPassword}
+          text={password}
           secureTextEntry={!isPasswordVisible}
         />
         <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
@@ -54,7 +91,10 @@ const LoginScreen = ({ navigation }) => {
       </TouchableOpacity>
 
       {/* Sign In button */}
-      <ActionButton text="Sign In"/>
+      <ActionButton
+        text="Sign In"
+        onPress={handleSignIn}
+      />
 
       {/* Link to registration */}
       <TouchableOpacity style={styles.registerButton}>

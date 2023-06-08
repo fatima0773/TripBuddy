@@ -1,174 +1,148 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { ActionButton } from '../../components/ActionButton';
-import { InputField } from '../../components/InputField';
+import { InputField } from './components/InputField';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import firebase from '@react-native-firebase/app';
 
 const ChangePassword = () => {
-    const [isPasswordVisible, setPasswordVisible] = useState(false);
-    const [isNewPasswordVisible, setNewPasswordVisible] = useState(false);
-    const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-    const [password, setPassword] = useState('');
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const [isNewPasswordVisible, setNewPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
-    const handleLogin = () => {
-        // Handle login functionality here
-        console.log('Login button pressed');
-    };
+  const handlePasswordChange = () => {
+    const user = firebase.auth().currentUser;
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      user.email,
+      oldPassword
+    );
 
-    const togglePasswordVisibility = () => {
-        setPasswordVisible(!isPasswordVisible);
-    };
-    
-    const toggleNewPasswordVisibility = () => {
-        setNewPasswordVisible(!isNewPasswordVisible);
-    };
-    
-    const toggleConfirmPasswordVisibility = () => {
+    user
+      .reauthenticateWithCredential(credential)
+      .then(() => {
+        user.updatePassword(newPassword)
+          .then(() => {
+            console.log('Password updated successfully');
+          })
+          .catch((error) => {
+            console.log('Error updating password:', error.message);
+          });
+      })
+      .catch((error) => {
+        console.log('Error reauthenticating user:', error.message);
+      });
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!isPasswordVisible);
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setNewPasswordVisible(!isNewPasswordVisible);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!isConfirmPasswordVisible);
-    };  
+  };
 
   return (
     <View style={styles.container}>
-        {/* Head */}
-        <Text style={styles.heading}>Change Password</Text>
-        
-        {/* Subheading */}
-        <Text style={styles.subHeading}>Keep your account protected with a stronger password</Text>
+      {/* Head */}
+      <Text style={styles.heading}>Change Password</Text>
 
-        {/* Password input field */}
-        <Text style={styles.label}>Old Password</Text>
-        <View style={styles.passwordContainer}>
-            <InputField
-            placeholder="Your Password"
-            text=""
-            secureTextEntry={!isPasswordVisible}
-            />
-            <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
-            <Icon
-                name={isPasswordVisible ? 'eye-off' : 'eye'}
-                size={20}
-                color="#555"
-            />
-            </TouchableOpacity>
-        </View>
-        
-        {/* New Password input field */}
-        <Text style={styles.label}>New Password</Text>
-        <View style={styles.passwordContainer}>
-            <InputField
-            placeholder="Your Password"
-            text=""
-            secureTextEntry={!isNewPasswordVisible}
-            />
-            <TouchableOpacity onPress={toggleNewPasswordVisibility} style={styles.eyeIcon}>
-            <Icon
-                name={isPasswordVisible ? 'eye-off' : 'eye'}
-                size={20}
-                color="#555"
-            />
-            </TouchableOpacity>
-        </View>
+      {/* Subheading */}
+      <Text style={styles.subHeading}>
+        Keep your account protected with a stronger password
+      </Text>
 
-        {/* Confirm Password input field */}
-        <Text style={styles.label}>Confirm Password</Text>
-        <View style={[styles.passwordContainer, {marginBottom: 40}]}>
-            <InputField
-            placeholder="Confirm Password"
-            text=""
-            secureTextEntry={!isConfirmPasswordVisible}
-            />
-            <TouchableOpacity onPress={toggleConfirmPasswordVisibility} style={styles.eyeIcon}>
-            <Icon
-                name={isConfirmPasswordVisible ? 'eye-off' : 'eye'}
-                size={20}
-                color="#555"
-            />
-            </TouchableOpacity>
-        </View>
+      {/* Old Password input field */}
+      <Text style={styles.label}>Old Password</Text>
+      <View style={styles.passwordContainer}>
+        <InputField
+          placeholder="Your Password"
+          value={oldPassword}
+          onChangeText={setOldPassword}
+          secureTextEntry={!isPasswordVisible}
+        />
+        <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
+          <Icon
+            name={isPasswordVisible ? 'eye-off' : 'eye'}
+            size={20}
+            color="#555"
+          />
+        </TouchableOpacity>
+      </View>
 
-        {/* Sign In button */}
-        <ActionButton text="Update" screenName="HomeScreen" />
+      {/* New Password input field */}
+      <Text style={styles.label}>New Password</Text>
+      <View style={styles.passwordContainer}>
+        <InputField
+          placeholder="Your Password"
+          value={newPassword}
+          onChangeText={setNewPassword}
+          secureTextEntry={!isNewPasswordVisible}
+        />
+        <TouchableOpacity onPress={toggleNewPasswordVisibility} style={styles.eyeIcon}>
+          <Icon
+            name={isNewPasswordVisible ? 'eye-off' : 'eye'}
+            size={20}
+            color="#555"
+          />
+        </TouchableOpacity>
+      </View>
+
+      {/* Sign In button */}
+      <ActionButton text="Update" onPress={handlePasswordChange} />
 
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        // justifyContent: 'center',
-        backgroundColor: '#fff',
-    },
-    heading: {
-        fontSize: 50,
-        color: '#274B47',
-        fontWeight: 'bold',
-        lineHeight: 80,
-        marginTop: 80,
-        marginRight: 15
-    },
-    subHeading: {
-        marginHorizontal: 40,
-        color: '#353535',
-        fontSize: 20,
-        lineHeight: 32,
-        marginTop: 8,
-        marginBottom: 30,
-    },
-    label: {
-        color: '#274B47',
-        fontSize: 18,
-        fontWeight: "900",
-        marginBottom: 12,
-        marginLeft: 50,
-        marginTop: 10,
-        alignSelf: 'flex-start',
-    },
-    passwordContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 15,
-        marginLeft: -6,
-        marginRight: 8
-    },
-    eyeIcon: {
-        marginLeft: -35,
-    },
-    changePassword: {
-        alignSelf: 'flex-end',
-        marginBottom: 30,
-        marginRight: 55,
-    },
-    profileContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 30,
-        marginBottom: 30,
-    },
-    profilePicture: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-    },
-    changePictureButton: {
-        paddingVertical: 10,
-        paddingHorizontal: 40,
-        borderRadius: 20,
-        borderColor: "#25605C",
-        borderWidth: 1,
-        marginLeft: 30
-    },
-    changePictureButtonText: {
-        color: '#25605C',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    clickableText: {
-        color: '#274B47',
-        fontSize: 17,
-        fontWeight: '600',
-    },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  heading: {
+    fontSize: 50,
+    color: '#274B47',
+    fontWeight: 'bold',
+    lineHeight: 80,
+    marginTop: 80,
+    marginRight: 15,
+  },
+  subHeading: {
+    marginHorizontal: 40,
+    color: '#353535',
+    fontSize: 20,
+    lineHeight: 32,
+    marginTop: 8,
+    marginBottom: 30,
+  },
+  label: {
+    color: '#274B47',
+    fontSize: 18,
+    fontWeight: '900',
+    marginBottom: 12,
+    marginLeft: 50,
+    marginTop: 10,
+    alignSelf: 'flex-start',
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+    marginLeft: -6,
+    marginRight: 8,
+  },
+  eyeIcon: {
+    marginLeft: -35,
+  },
 });
 
 export default ChangePassword;

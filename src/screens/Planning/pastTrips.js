@@ -1,22 +1,62 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import PlaceCard from "../Exploration/Components/placeCard";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, SafeAreaView } from "react-native";
+import PlaceCard from "../../components/placeCard";
+
+import { useNavigation } from '@react-navigation/native'; // import useNavigation
+import BottomTabNavigator from "../../navigation/bottomTabNavigator";
 
 const PastTrips = () => {
-  const [selected, setSelected] = useState("upcoming");
+  
+  const navigation = useNavigation(); 
+
+  const [selected, setSelected] = useState("past");
 
   const handleScrollLeft = () => {
-    // Handle scroll left event here
-    // Implement navigation logic to switch to a new screen
-    setSelected("upcoming");
+    navigation.navigate('UpcomingTrips', { selected: "upcoming" });
   };
-
+  
   const handleScrollRight = () => {
-    // Handle scroll right event here
-    // Implement navigation logic to switch to a new screen
     setSelected("past");
-
   };
+
+  const data = [
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+    // {
+    //   imageSource: require('../../assets/images/swat-valley.jpg'),
+    //   name: 'Swat Valley',
+    //   ratings: 4.9,
+    // },
+    // {
+    //   imageSource: require('../../assets/images/swat-valley.jpg'),
+    //   name: 'Swat Valley',
+    //   ratings: 4.9,
+    // },
+    // {
+    //   imageSource: require('../../assets/images/swat-valley.jpg'),
+    //   name: 'Swat Valley',
+    //   ratings: 4.9,
+    // },
+    // {
+    //   imageSource: require('../../assets/images/swat-valley.jpg'),
+    //   name: 'Swat Valley',
+    //   ratings: 4.9,
+    // },
+    // {
+    //   imageSource: require('../../assets/images/swat-valley.jpg'),
+    //   name: 'Swat Valley',
+    //   ratings: 4.9,
+    // },
+  ];
+
 
   return (
     <View style={styles.container}>
@@ -28,30 +68,30 @@ const PastTrips = () => {
         <TouchableOpacity onPress={handleScrollRight}>
           <Text style={[styles.option, selected === "past" && styles.selected]}> Past </Text>
         </TouchableOpacity>
+
       </View>
       <View style={styles.horizontalLine} />
-      <ScrollView>
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Hi there, I am Fahad"
-          ratings={4.5}
+
+      <SafeAreaView style={{paddingBottom:100}}>
+        <FlatList
+          data={data}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <PlaceCard
+              imageSource={item.imageSource}
+              name={item.name}
+              ratings={item.ratings}
+              icon="calendar"
+              iconColor="white"
+              handlePress={() => navigation.navigate('TasksDone')}
+
+            />
+          )}
         />
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Hi there, I am Fahad"
-          ratings={4.5}
-        />
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Hi there, I am Fahad"
-          ratings={4.5}
-        />
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Hi there, I am Fahad"
-          ratings={4.5}
-        />
-      </ScrollView>
+      </SafeAreaView>
+<BottomTabNavigator/>
+      
     </View>
   );
 };
@@ -59,11 +99,11 @@ const PastTrips = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#f0f0f0",
+    padding: 25,
+    backgroundColor: "white",
   },
   heading: {
-    fontSize: 24,
+    fontSize: 35,
     fontWeight: "bold",
     marginBottom: 16,
     color: "#274B47",
@@ -71,16 +111,20 @@ const styles = StyleSheet.create({
   optionsContainer: {
     flexDirection: "row",
     marginBottom: 8,
+
   },
   option: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginRight: 16,
+    color: "#353535",
+    opacity: 0.5,
   },
   selected: {
-    color: "green",
+    color: "#25605C",
     borderBottomWidth: 2,
-    borderBottomColor: "#274B47",
+    borderBottomColor: "#25605C",
+    opacity: 1,
   },
   horizontalLine: {
     borderBottomColor: "black",

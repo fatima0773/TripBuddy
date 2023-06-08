@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,24 +11,17 @@ import {
 import PlaceCard from '../../components/placeCard';
 import ProfileComponent from '../../components/profileComponent';
 import Search from '../../components/search';
+import { firebase } from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
-const PopularPlaces = () => {
-<<<<<<< HEAD
-  const [text, setText] = React.useState('');
+const PopularPlaces = ({ navigation }) => {  
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
 
-=======
-    return (
-      <View style={styles.container}>
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Trip Place Name"
-          ratings={4.5}
-        />
-      </View>
-    );
-  };
+  useEffect(() => {
+    getPopularPlaces()
+  }, [])
   
->>>>>>> a49eb2b22ac9dc67abe0ca853d524d3311c4ccc3
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -48,55 +41,43 @@ const PopularPlaces = () => {
     },
   });
 
-  const data = [
-    {
-      imageSource: require('../../assets/images/swat-valley.jpg'),
-      name: 'Swat Valley',
-      ratings: 4.9,
-    },
-    {
-      imageSource: require('../../assets/images/swat-valley.jpg'),
-      name: 'Swat Valley',
-      ratings: 4.9,
-    },
-    {
-      imageSource: require('../../assets/images/swat-valley.jpg'),
-      name: 'Swat Valley',
-      ratings: 4.9,
-    },
-    {
-      imageSource: require('../../assets/images/swat-valley.jpg'),
-      name: 'Swat Valley',
-      ratings: 4.9,
-    },
-    {
-      imageSource: require('../../assets/images/swat-valley.jpg'),
-      name: 'Swat Valley',
-      ratings: 4.9,
-    },
-    {
-      imageSource: require('../../assets/images/swat-valley.jpg'),
-      name: 'Swat Valley',
-      ratings: 4.9,
-    },
-    {
-      imageSource: require('../../assets/images/swat-valley.jpg'),
-      name: 'Swat Valley',
-      ratings: 4.9,
-    },
-    // Add more place card data objects here
-  ];
+  const getPopularPlaces = async (gender, minAge, maxAge) => {
+  setLoading(true);
+  try {
+    const tripsSnapshot = await firestore()
+      .collection('trips')
+      .get();
+
+    const dataFetched = [];
+    tripsSnapshot.forEach((doc) => {
+      const tripsData = {
+        id: doc.id,
+        ...doc.data(),
+      };
+      dataFetched.push(tripsData);
+    });
+
+    setData(dataFetched);
+    setLoading(false);
+    console.log(data)
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error;
+  }
+};
+
+
 
   return (
-    
     <View style={styles.container}>
       <StatusBar
-                backgroundColor="#25605C"
-            />
+        backgroundColor="#25605C"
+      />
       <View style={{paddingRight: 25, paddingLeft: 25, paddingTop: 25}}>
         <ProfileComponent
           imageSource={require('../../assets/images/swat-valley.jpg')}
           name="Vania"
+          handlePress={() => navigation.navigate('Profile')}
         />
         <View>
           <Text style={styles.heading1}>Lets Explore Pakistan</Text>
@@ -114,11 +95,14 @@ const PopularPlaces = () => {
             showsVerticalScrollIndicator={false}
             renderItem={({item}) => (
               <PlaceCard
-                imageSource={item.imageSource}
+                imageSource={{uri: item.photos[0]}}
                 name={item.name}
-                ratings={item.ratings}
+                ratings={item.rating}
                 icon="star"
                 iconColor="#FFC700"
+                handlePress={() => navigation.navigate('DestinationDetails', {
+                  item: item
+                })}
               />
             )}
           />

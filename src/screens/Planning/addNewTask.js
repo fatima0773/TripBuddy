@@ -1,14 +1,28 @@
 import React from 'react';
 import { View, Text, TouchableOpacity , StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Alert } from 'react-native';
 
 // import Input from './components/Input.js';
 import Date from './components/date.js';
-import  ActionButton  from '../../components/ActionButton.js';
+import  {ActionButton}  from '../../components/ActionButton.js';
 import Input from './components/InputField.js';
 
 import InputField from './components/time.js';
 const AddNewTask = ({ navigation }) => {
+  const handlePress = () => {
+    Alert.alert(
+      "Task",
+      "Task Added Successfully",
+      [
+        {
+          text: "OK", 
+          onPress: () => navigation.navigate('ViewTask')
+        }
+      ],
+      { cancelable: false }
+    );
+  };
     return (
       <View style={styles.container}>
 
@@ -24,7 +38,7 @@ const AddNewTask = ({ navigation }) => {
     <Input placeholder="Add task title" isLarge={false}/>
     <Input placeholder="Add task title" isLarge={true} name={"optional"}/>
     <InputField placeholder="12:00PM" clockk={true}/>
-    <ActionButton text="Savee"/>
+    <ActionButton text="Save" style={{alignSelf:'center'}} onPress={handlePress}/>
 
     
     </View>

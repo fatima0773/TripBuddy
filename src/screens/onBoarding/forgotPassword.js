@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { ActionButton } from '../../components/ActionButton';
-import { InputField } from '../../components/InputField';
+import { InputField } from './components/InputField'
 
 const ForgotPassword = ({ navigation }) => {
 

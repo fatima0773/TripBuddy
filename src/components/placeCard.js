@@ -13,7 +13,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import colors from '../screens/styles/colors';
 
-const PlaceCard = ({imageSource, name, ratings, icon, iconColor}) => {
+const PlaceCard = ({imageSource, name, ratings, icon, iconColor, handlePress}) => {
   const selectedMode = colors['light'];
   const styles = StyleSheet.create({
     card: {
@@ -88,7 +88,8 @@ const PlaceCard = ({imageSource, name, ratings, icon, iconColor}) => {
                 <Text style={styles.ratings}>{ratings}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.seeMoreContainer}>
+            <TouchableOpacity style={styles.seeMoreContainer}
+            onPress={handlePress}>
               <MaterialIcons
                 name="keyboard-arrow-right"
                 size={45}

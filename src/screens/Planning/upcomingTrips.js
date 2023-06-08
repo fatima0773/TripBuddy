@@ -1,18 +1,61 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import PlaceCard from "../Exploration/Components/placeCard";
+import { useNavigation } from '@react-navigation/native';
+
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, SafeAreaView } from "react-native";
+import PlaceCard from "../../components/placeCard";
+import BottomTabNavigator from "../../navigation/bottomTabNavigator";
 
 const UpcomingTrips = () => {
-  const [selected, setSelected] = useState("upcoming");
 
+  const navigation = useNavigation();
+
+  const [selected, setSelected] = useState("upcoming");
   const handleScrollLeft = () => {
     setSelected("upcoming");
-  };
 
-  const handleScrollRight = () => {
-    setSelected("past");
-    // navigation.navigate("PastTrips");
   };
+  const handleScrollRight = () => {
+    navigation.navigate('PastTrips', { selected: "past" });
+  };
+  
+
+  const data = [
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+    {
+      imageSource: require('../../assets/images/swat-valley.jpg'),
+      name: 'Swat Valley',
+      ratings: 4.9,
+    },
+  ];
 
   return (
     <View style={styles.container}>
@@ -26,31 +69,28 @@ const UpcomingTrips = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.horizontalLine} />
-      <ScrollView>
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Hi there, I am Fahad"
-          ratings={4.5}
-          icon="star"
-          iconColor={"#F2C94C"}
-        />
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Hi there, I am Fahad"
-          ratings={4.5}
+      
+      <SafeAreaView style={{paddingBottom:100}}>
+      <FlatList
+            data={data}
+            keyExtractor={(item, index) => index.toString()}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item}) => (
+              <PlaceCard
+                imageSource={item.imageSource}
+                name={item.name}
+                ratings={item.ratings}
+                icon="calendar"
+                iconColor="white"
+                handlePress={() => navigation.navigate('ViewTask')}
+              />
+            )}
+          />
 
-        />
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Hi there, I am Fahad"
-          ratings={4.5}
-        />
-        <PlaceCard
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Hi there, I am Fahad"
-          ratings={4.5}
-        />
-      </ScrollView>
+      </SafeAreaView>
+      <BottomTabNavigator />
+
+
     </View>
   );
 };
@@ -58,11 +98,11 @@ const UpcomingTrips = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#f0f0f0",
+    padding:25,
+    backgroundColor: "white",
   },
   heading: {
-    fontSize: 24,
+    fontSize: 35,
     fontWeight: "bold",
     marginBottom: 16,
     color: "#274B47",
@@ -70,16 +110,20 @@ const styles = StyleSheet.create({
   optionsContainer: {
     flexDirection: "row",
     marginBottom: 8,
+    
   },
   option: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginRight: 16,
+    color: "#353535",
+    opacity: 0.5,
   },
   selected: {
-    color: "green",
+    color: "#25605C",
     borderBottomWidth: 2,
-    borderBottomColor: "green",
+    borderBottomColor: "#25605C",
+    opacity: 1,
   },
   horizontalLine: {
     borderBottomColor: "black",

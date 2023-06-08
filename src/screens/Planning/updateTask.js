@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, TouchableOpacity , StyleSheet, TextInput} from 'react-native';
+import { View, Text, TouchableOpacity , StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // import Input from './components/Input.js';
 import Date from './components/date.js';
-import  ActionButton  from '../../components/ActionButton.js';
+import  {ActionButton}  from '../../components/ActionButton.js';
 import Input from './components/InputField.js';
 
 import InputField from './components/time.js';
-const AddNewTask = ({ navigation }) => {
+const UpdateTask = ({ navigation }) => {
     return (
       <View style={styles.container}>
 
@@ -24,7 +24,7 @@ const AddNewTask = ({ navigation }) => {
     <Input placeholder="Add task title" isLarge={false}/>
     <Input placeholder="Add task title" isLarge={true} name={"optional"}/>
     <InputField placeholder="12:00PM" clockk={true}/>
-    <ActionButton text="Update"/>
+    <ActionButton text="Update" style={{alignSelf:'center'}}/>
 
     
     </View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
   },
   heading: {
-    fontSize: 26,
+    fontSize: 35,
     fontWeight: "bold",
     // marginBottom: 16,
     marginTop: 40,
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddNewTask;
+export default UpdateTask;

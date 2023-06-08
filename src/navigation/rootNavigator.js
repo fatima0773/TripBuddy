@@ -7,6 +7,7 @@ import IntroScreen from "../screens/onBoarding/introScreen";
 import ForgotPassword from "../screens/onBoarding/forgotPassword";
 import ResetPassword from "../screens/onBoarding/resetPassword";
 import ChangePassword from "../screens/onBoarding/changePassword";
+import BottomTabNavigator from "./bottomTabNavigator";
 // import ProfileScreen from "../screens/onBoarding/profileScreen";
 
 const Stack = createNativeStackNavigator();
@@ -45,6 +46,12 @@ const RootNavigator = () => {
           component={ChangePassword}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="Tab"
+          component={BottomTabNavigator}
+          options={{ headerShown: false }}
+        />
+
 		{/* <Stack.Screen
           name="Profile Screen"
           component={ProfileScreen}

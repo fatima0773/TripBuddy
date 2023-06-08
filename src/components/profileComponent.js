@@ -18,6 +18,7 @@ const ProfileComponent = ({ name, imageSource }) => {
       fontSize: 23,
       fontWeight: '500',
       color: '#353535',
+      fontFamily: 'Montserrat-Regular'
     },
   });
 

@@ -7,6 +7,7 @@ import MatericalCommunityIcon from 'react-native-vector-icons/MaterialCommunityI
 import OcticonsIcon from 'react-native-vector-icons/Octicons' //home list-unordered
 import FoundationIcon from 'react-native-vector-icons/Foundation' // mountains
 import IoniconsIcon from 'react-native-vector-icons/Ionicons' //journal-outline
+import Exploration from './explorationNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -118,7 +119,8 @@ const BottomTabNavigator = ({ navigation, route }) => {
     >
       <Tab.Screen
         name="Exploration"
-        component={ViewAllJournalEntries}
+        component={Exploration
+        }
         options={{ headerShown: false }}
       />
       <Tab.Screen

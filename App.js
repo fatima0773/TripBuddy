@@ -8,6 +8,9 @@ import auth from '@react-native-firebase/auth';
 import UserContext from "./src/userContext";
 import RootNavigator from "./src/navigation/rootNavigator";
 import Dashboard from "./src/screens/onBoarding/dashboard";
+import ViewAllJournalEntries from "./src/screens/tripJournal/viewAllJournalEntries";
+import ViewJournalEntry from "./src/screens/tripJournal/viewJournalEntry";
+import ProfileScreen from "./src/screens/onBoarding/profileScreen";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCvq_2NLOqjKMtcydLjFA9oQDSTZVZGh_s",
@@ -40,8 +43,12 @@ const App = () => {
 
   return (
     <UserContext.Provider value={userId}>
-      {/* <RootNavigator/> */}
-      <Dashboard/>
+      {/* <ViewJournalEntry /> */}
+      {/* <ViewAllJournalEntries /> */}
+      <RootNavigator/> 
+      {/* <SplashScreen /> */}
+      {/* <ProfileScreen /> */}
+      {/* <Dashboard/> */}
     </UserContext.Provider>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, StyleSheet } from 'react-native';
 
-export function InputField({ placeholder, text, style, secureTextEntry}) {
+export function InputField({ placeholder, text, style, secureTextEntry, onChangeText, onBlur}) {
   const [inputText, setInputText] = useState(text);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -9,20 +9,20 @@ export function InputField({ placeholder, text, style, secureTextEntry}) {
     setIsFocused(true);
   };
 
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
+  // const handleBlur = () => {
+  //   setIsFocused(false);
+  // };
 
   return (
     <TextInput
       style={[styles.input, isFocused && styles.inputFocused, style]}
       placeholder={placeholder}
       placeholderTextColor="#353535"
-      value={inputText}
+      value={text}
       mode="outlined"
-      onChangeText={newText => setInputText(newText)}
+      onChangeText={onChangeText}
       onFocus={handleFocus}
-      onBlur={handleBlur}
+      onBlur={onBlur}
       secureTextEntry={secureTextEntry}
     />
   );
