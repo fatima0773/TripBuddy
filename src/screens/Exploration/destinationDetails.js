@@ -238,8 +238,10 @@ const DestinationDetails = ({ navigation, route }) => {
               <Facility icon="fastfood" facility="Food" />
             </View>
           </View>
-          <TouchableOpacity style={{flexDirection: 'row', marginVertical: 20}}>
-            <Text style={styles.attractions}>See nearby Attractions</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CheckWeather')}
+            style={{ flexDirection: 'row', marginVertical: 20 }}>
+            <Text style={styles.attractions}>Check Weather</Text>
             <FontAwesome
               name="angle-double-right"
               size={20}
@@ -248,7 +250,7 @@ const DestinationDetails = ({ navigation, route }) => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={navigation.navigate('PlanTrip')}
+            onPress={() => navigation.navigate('PlanTrip')}
             style={styles.button} >
             <Text style={styles.text}>Book Trip Now</Text>
             <MaterialCommunityIcons

@@ -8,6 +8,7 @@ import ForgotPassword from "../screens/onBoarding/forgotPassword";
 import ResetPassword from "../screens/onBoarding/resetPassword";
 import ChangePassword from "../screens/onBoarding/changePassword";
 import BottomTabNavigator from "./bottomTabNavigator";
+import SplashScreen from "../screens/splash/splashScreen";
 // import ProfileScreen from "../screens/onBoarding/profileScreen";
 
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,11 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="Splash Screen"
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Intro Screen"
           component={IntroScreen}

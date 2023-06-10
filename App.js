@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, console } from "react-native";
 import 'react-native-gesture-handler';
 // import PopularPlaces from "./src/screens/Exploration/popularPlaces";
 import { Platform } from 'react-native';
 import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import UserContext from "./src/userContext";
-import RootNavigator from "./src/navigation/rootNavigator";
-import Dashboard from "./src/screens/dashboard/userDashboard";
-import ViewAllJournalEntries from "./src/screens/tripJournal/viewAllJournalEntries";
 import ViewJournalEntry from "./src/screens/tripJournal/viewJournalEntry";
-import ProfileScreen from "./src/screens/onBoarding/profileScreen";
-
+import SplashScreen from "./src/screens/splash/splashScreen";
+import RootNavigator from "./src/navigation/rootNavigator";
 const firebaseConfig = {
   apiKey: "AIzaSyCvq_2NLOqjKMtcydLjFA9oQDSTZVZGh_s",
   authDomain: "tripbuddy-dcd18.firebaseapp.com",
@@ -43,12 +40,9 @@ const App = () => {
 
   return (
     <UserContext.Provider value={userId}>
-      {/* <ViewJournalEntry /> */}
-      {/* <ViewAllJournalEntries /> */}
-      <RootNavigator/> 
-      {/* <SplashScreen /> */}
-      {/* <ProfileScreen /> */}
-      {/* <Dashboard/> */}
+      <RootNavigator />
+      {/* <ViewJournalEntry />
+      <SplashScreen/> */}
     </UserContext.Provider>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import TimePicker from 'react-native-simple-time-picker';
+// import TimePicker from 'react-native-simple-time-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ClockIcon = () => <Icon name="access-time" color="#25605C" size={37} />;
@@ -30,11 +30,12 @@ function InputField({ placeholder, clockk }) {
   return (
     <View style={{ backgroundColor: 'white' }}>
       {showTimePicker ? (
-        <TimePicker
-          selectedHours={time.selectedHours}
-          selectedMinutes={time.selectedMinutes}
-          onChange={handleTimeChange}
-        />
+        // <TimePicker
+        //   selectedHours={time.selectedHours}
+        //   selectedMinutes={time.selectedMinutes}
+        //   onChange={handleTimeChange}
+        // /> 
+        null
       ) : (
         <TextInput
           mode="outlined"

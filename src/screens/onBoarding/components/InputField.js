@@ -15,11 +15,14 @@ export function InputField({ placeholder, text, style, secureTextEntry, onChange
 
   return (
     <TextInput
-      style={[styles.input, isFocused && styles.inputFocused, style]}
+      style={[styles.input, style]}
       placeholder={placeholder}
       placeholderTextColor="#353535"
+      outlineColor="#353535"
+      activeOutlineColor="#25605C"
+      textColor="#353535"
       value={text}
-      mode="outlined"
+      outlineStyle={{ borderRadius: 27, borderWidth: 0.5, borderWidth: isFocused ? 2 : 0.5}}
       onChangeText={onChangeText}
       onFocus={handleFocus}
       onBlur={onBlur}
@@ -40,11 +43,5 @@ const styles = StyleSheet.create({
     width: "80%",
     alignSelf: 'center',
     fontWeight: 'normal',
-  },
-  inputFocused: {
-    borderWidth: 1,
-    borderColor: '#25605C',
-    fontWeight: 'bold',
-    color: '#25605C',
-  },
+  }
 });

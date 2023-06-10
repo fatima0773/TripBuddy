@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     color: 'rgba(53, 53, 53, 0.4)',
     fontSize: 20,
     marginTop: 8,
-    marginHorizontal: 34
+    marginHorizontal: 25
   },
 });
 

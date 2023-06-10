@@ -19,7 +19,8 @@ const ProfileScreen = ({ navigation }) => {
 	const [name, setName] = useState('');
 	const [contact, setContact] = useState('');
 	const [email, setEmail] = useState('');
-	const [filePath, setFilePath] = useState('')
+  const [filePath, setFilePath] = useState('');
+  const userId = useContext(UserContext);
 
 	const handleChangePassword = () => {
 			navigation.navigate('Change Password Screen');
@@ -31,7 +32,7 @@ const ProfileScreen = ({ navigation }) => {
 	
 	useEffect(() => {
 		fetchUser()
-	}, [profilePhoto])
+	}, [profilePhoto, filePath, name])
 
 	const chooseFile = type => {
     let options = {
@@ -59,17 +60,14 @@ const ProfileScreen = ({ navigation }) => {
 		});
 		
 		updatePhoto();
-		
-    console.log(filePath)
   };
 	
 
-	const fetchUser = (uid) => {
-		uid = 'rjO2ABVS5JPAJH6vDUF9mJLPc2a2';
+	const fetchUser = () => {
 		setLoading(true)
 		const usersCollection = firebase.firestore().collection('users');
 		usersCollection
-			.doc(uid)
+			.doc(userId)
 			.get()
 			.then((doc) => {
 				if (doc.exists) {
@@ -80,16 +78,14 @@ const ProfileScreen = ({ navigation }) => {
 					setContact(fetchedUser.contact);
 					setProfilePhoto(fetchedUser.profilePhoto)
 				}
-				console.log(user)
 				setLoading(false)
 			})
 			.catch((error) => {
-				console.log('Error fetching user name:', error);
+				console.log('Error fetching user:', error);
 			});
 	};
 
 	const updateName = () => {
-		const userId = 'rjO2ABVS5JPAJH6vDUF9mJLPc2a2';
 		const usersCollection = firebase.firestore().collection('users');
 		usersCollection
 			.doc(userId)
@@ -103,7 +99,6 @@ const ProfileScreen = ({ navigation }) => {
 	};
 	
 	const updateContact = () => {
-		const userId = 'rjO2ABVS5JPAJH6vDUF9mJLPc2a2';
 		const usersCollection = firebase.firestore().collection('users');
 		usersCollection
 			.doc(userId)
@@ -117,7 +112,6 @@ const ProfileScreen = ({ navigation }) => {
 	};
 	
 	const updatePhoto = async () => {
-		const userId = 'rjO2ABVS5JPAJH6vDUF9mJLPc2a2';
 		try {
 			setLoading(true)
 			const storageRef = storage().ref().child(`userImages/${userId}`);
@@ -173,7 +167,7 @@ const ProfileScreen = ({ navigation }) => {
         <Text style={styles.label}>Email</Text>
         <InputField
             placeholder="Your email"
-            text="vania.majid14@gmail.com"
+            text={email}
         />
 
         {/* Your phone input field */}
@@ -191,7 +185,9 @@ const ProfileScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         {/* Sign In button */}
-        <ActionButton text="Update"/>
+      <ActionButton
+        onPress={() => navigation.navigate('Home')}
+        text="Update" />
 
     </View>
   );

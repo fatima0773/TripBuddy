@@ -24,7 +24,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const checkError = () => {
-    if (name === null || email === null || filePath === null || contact === null || password === null) {
+    if (email === null || password === null) {
       setShowError(true)
       console.log(showError)
     }
@@ -57,7 +57,10 @@ const LoginScreen = ({ navigation }) => {
       <Text style={styles.heading}>Hello Again!</Text>
       <Text style={styles.subHeading}>Welcome back, you've been missed!</Text>
 
-      {/* Your name input field */}
+      {
+        showError === true ? (<Text style={{ color: 'red', marginVertical: 10, fontFamily: 'Poppins-Regular' }}>Please fill out all the required fields</Text>) : null
+      }
+      {/* Your email input field */}
       <InputField
         placeholder="Your email"
         style={{ marginBottom: 15 }}
@@ -67,9 +70,6 @@ const LoginScreen = ({ navigation }) => {
 
       {/* Password input field */}
       <View style={styles.passwordContainer}>
-        {
-          showError === true ? (<Text style={{ color: 'red', marginVertical: 10, fontFamily: 'Poppins-Regular' }}>Please fill out all the required fields</Text>) : null
-        }
         <InputField
           placeholder="Your Password"
           onChangeText={setPassword}
@@ -93,7 +93,7 @@ const LoginScreen = ({ navigation }) => {
       {/* Sign In button */}
       <ActionButton
         text="Sign In"
-        onPress={handleSignIn}
+        onPress={checkError}
       />
 
       {/* Link to registration */}

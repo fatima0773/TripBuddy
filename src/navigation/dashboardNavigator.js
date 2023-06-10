@@ -5,6 +5,7 @@ import PopularPlaces from '../screens/Exploration/popularPlaces';
 import ProfileScreen from '../screens/onBoarding/profileScreen';
 import ViewAllJournalEntries from '../screens/tripJournal/viewAllJournalEntries';
 import UpcomingTrips from '../screens/Planning/upcomingTrips';
+import Exploration from './explorationNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +14,7 @@ function Dashboard() {
     <Stack.Navigator>
       <Stack.Screen
         name="Popular Places"
-        component={PopularPlaces}
+        component={Exploration}
         options={{ headerShown: false }} />
       <Stack.Screen
         name="Profile"
@@ -24,7 +25,7 @@ function Dashboard() {
         component={UpcomingTrips}
         options={{ headerShown: false }} />
       <Stack.Screen
-        name="Journals"
+        name="View All Journal Entries"
         component={ViewAllJournalEntries}
         options={{ headerShown: false }} />
     </Stack.Navigator>

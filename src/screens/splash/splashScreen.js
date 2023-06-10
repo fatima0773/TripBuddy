@@ -1,9 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, ImageBackground, StatusBar, Image, Animated } from 'react-native';
+import { useNavigation } from "@react-navigation/native"; 
+import auth from '@react-native-firebase/auth';
 
-const SplashScreen = ({ navigation }) => {
+const SplashScreen = () => {
   const bounceAnim = useRef(new Animated.Value(0)).current;
+  const navigation = useNavigation(); // Initialize the navigation object
 
+  const [userSignedIn, setUserSignedIn] = useState(false);
   useEffect(() => {
     Animated.spring(bounceAnim, {
       toValue: 1,
@@ -13,11 +17,24 @@ const SplashScreen = ({ navigation }) => {
       useNativeDriver: true,
     }).start();
 
-    const timer = setTimeout(() => {
-      navigation.navigate('Intro Screen'); // Replace 'Exploration' with the actual screen name in your stack navigation
-    }, 5000);
+    const unsubscribe = auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUserSignedIn(true);
+        setTimeout(() => {
+          navigation.navigate('Tab');
+        }, 3000);
+        
+      } else {
+        setTimeout(() => {
+          navigation.navigate('Intro Screen');
+        }, 3000);
+				
+      }
+    });
 
-    return () => clearTimeout(timer);
+    return () => {
+      unsubscribe();
+    };
   }, [bounceAnim, navigation]);
 
   const styles = StyleSheet.create({

@@ -18,7 +18,7 @@ import FairyMeadows from '../../assets/images/journal-assets/fairy-meadows.png';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FeatherIcons from 'react-native-vector-icons/Feather'
 
-const ViewAllJournalEntries = () => {
+const ViewAllJournalEntries = ({navigation}) => {
   const selectedMode = colors['light'];
   const [name, setName] = useState('Fatima');
   const [profilePicture, setProfilePicture] = useState('');
@@ -43,7 +43,9 @@ const ViewAllJournalEntries = () => {
 
   const renderJournalCard = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.journalCard}>
+			<TouchableOpacity style={styles.journalCard}
+				onPress={() => navigation.navigate('View Journal Entry')}
+			>
         <Image style={styles.coverImage} source={item.coverImage} />
         <View style={styles.tripDetailsContainer}>
           <View style={styles.rowContainer}>
@@ -105,7 +107,7 @@ const ViewAllJournalEntries = () => {
 		detailsText: {
 			fontSize: 15,
 			color: selectedMode.primaryDark,
-			fontFamily: 'Poppins-Regular'
+			fontFamily: 'Poppins-Regular',
 		}, 
 		listEnd: {
 			height: 10,
@@ -129,7 +131,8 @@ const ViewAllJournalEntries = () => {
 
   return (
 		<SafeAreaView style={styles.mainContainer}>
-			<TouchableOpacity style={styles.addButton}>
+			<TouchableOpacity style={styles.addButton}
+				onPress={() => navigation.navigate('Add New Journal Entry')}>
 				<FeatherIcons
 					name="plus"
 					color="white"

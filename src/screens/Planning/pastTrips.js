@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList, SafeAreaView } from
 import PlaceCard from "../../components/placeCard";
 
 import { useNavigation } from '@react-navigation/native'; // import useNavigation
-import BottomTabNavigator from "../../navigation/bottomTabNavigator";
 
 const PastTrips = () => {
   
@@ -90,7 +89,6 @@ const PastTrips = () => {
           )}
         />
       </SafeAreaView>
-<BottomTabNavigator/>
       
     </View>
   );

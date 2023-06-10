@@ -143,7 +143,6 @@ const ViewTask = () => {
   });
 
   const OnPress = () => {
-    // alert('Button Pressed');
     navigation.navigate('AddTask');
   };
 
@@ -318,7 +317,7 @@ const ViewTask = () => {
             </SafeAreaView>
           </View>
         </View>
-        <TouchableOpacity onPress={() => OnPress()} style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.navigate('AddTask')} style={styles.button}>
           <Text style={styles.text}>Add Task</Text>
         </TouchableOpacity>
       </View>

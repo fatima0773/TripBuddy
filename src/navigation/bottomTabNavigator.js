@@ -10,6 +10,8 @@ import IoniconsIcon from 'react-native-vector-icons/Ionicons' //journal-outline
 import Exploration from './explorationNavigator';
 import UserDashboard from '../screens/dashboard/userDashboard';
 import YourChecklist from '../screens/checklist/yourChecklist';
+import PlanningNavigator from './planningNavigator';
+import JournalNavigator from './journalNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -126,7 +128,7 @@ const BottomTabNavigator = ({ navigation, route }) => {
       />
       <Tab.Screen
         name="Trip Planning"
-        component={ViewAllJournalEntries}
+        component={PlanningNavigator}
         options={{ headerShown: false }}
       />
       <Tab.Screen
@@ -141,7 +143,7 @@ const BottomTabNavigator = ({ navigation, route }) => {
 			/>
 			<Tab.Screen
         name="Journal"
-        component={ViewAllJournalEntries}
+        component={JournalNavigator}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

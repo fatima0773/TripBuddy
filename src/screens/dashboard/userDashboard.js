@@ -10,7 +10,8 @@ import ProfileComponent from '../../components/profileComponent';
 import PopularPlaceList from './components/popularPlaceList';
 import TripList from './components/tripList';
 import JournalList from './components/journalList';
-
+import { firebase } from '@react-native-firebase/auth';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const UserDashboard = ({ navigation }) => {
   
   const popularPlaceData = [
@@ -79,16 +80,34 @@ const UserDashboard = ({ navigation }) => {
     },
   ];
 
+  const handleLogout = async () => {
+    try {
+      await firebase.auth().signOut();
+      
+      navigation.navigate('Intro Screen')
+      // Logout successful
+      // You can navigate to the login screen or perform any other necessary actions
+    } catch (error) {
+      console.log('Error logging out:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#25605C" />
       <View style={styles.contentContainer}>
         {/* Profile */}
-        <ProfileComponent
-          imageSource={require('../../assets/images/swat-valley.jpg')}
-          name="Vania"
-          handlePress={() => navigation.navigate('Profile')}
-        />
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+          {/* Profile */}
+          <ProfileComponent
+            imageSource={require('../../assets/images/swat-valley.jpg')}
+            name="Vania"
+            handlePress={() => navigation.navigate('Profile')}
+          />
+          <TouchableOpacity onPress={handleLogout}>
+            <MaterialIcons name="power-settings-new" color='#25605C' size={25} style={{paddingRight: 20, paddingBottom:20}}/>
+          </TouchableOpacity>
+        </View>
 
         {/* Heading */}
         <View>
@@ -98,7 +117,7 @@ const UserDashboard = ({ navigation }) => {
         {/* Popular Places */}
         <View>
           <Text style={styles.heading2}>Popular Places</Text>
-          <TouchableOpacity style={styles.seeMoreButton} onPress={() => navigation.navigate('Popular Places')}>
+          <TouchableOpacity style={styles.seeMoreButton} onPress={() => navigation.navigate('Exploration', {screen: 'PopularPlaces'})}>
             <Text style={styles.seeMoreText}>See More</Text>
           </TouchableOpacity>
           <PopularPlaceList data={popularPlaceData}/>
@@ -107,7 +126,8 @@ const UserDashboard = ({ navigation }) => {
         {/* Trips */}
         <View>
           <Text style={styles.heading2}>Trips</Text>
-          <TouchableOpacity style={styles.seeMoreButton} onPress={() => navigation.navigate('Upcoming Trips')}>
+          <TouchableOpacity style={styles.seeMoreButton}
+            onPress={() => navigation.navigate('Trip Planning', { screen: 'UpcomingTrips' })}>
             <Text style={styles.seeMoreText}>See More</Text>
           </TouchableOpacity>
           <TripList data={tripsData}/>
@@ -116,7 +136,8 @@ const UserDashboard = ({ navigation }) => {
         {/* Journals */}
         <View>
           <Text style={styles.heading2}>Journals</Text>
-          <TouchableOpacity style={styles.seeMoreButton} onPress={() => navigation.navigate('Journals')}>
+          <TouchableOpacity style={styles.seeMoreButton}
+            onPress={() => navigation.navigate('Journal', { screen: "View All Journal Entries" })}>
             <Text style={styles.seeMoreText}>See More</Text>
           </TouchableOpacity>
           <JournalList data={jounralsData}/>
@@ -132,12 +153,12 @@ export default UserDashboard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   contentContainer: {
     flex: 1,
-    padding: 25,
-    paddingRight: 0,
+    padding: 30,
+    paddingRight: 0
   },
   heading1: {
     color: '#274B47',
@@ -147,9 +168,9 @@ const styles = StyleSheet.create({
   },
   heading2: {
     color: '#25605C',
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: '600',
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   seeMoreButton: {
     position: 'absolute',

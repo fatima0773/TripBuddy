@@ -8,7 +8,7 @@ import Date from './components/date.js';
 import  {ActionButton}  from '../../components/ActionButton.js';
 import Input from './components/InputField.js';
 
-import InputField from './components/time.js';
+// import InputField from './components/time.js';
 const AddNewTask = ({ navigation }) => {
   const handlePress = () => {
     Alert.alert(
@@ -37,7 +37,7 @@ const AddNewTask = ({ navigation }) => {
     <Text style={styles.heading}>New Task</Text>
     <Input placeholder="Add task title" isLarge={false}/>
     <Input placeholder="Add task title" isLarge={true} name={"optional"}/>
-    <InputField placeholder="12:00PM" clockk={true}/>
+    {/* <InputField placeholder="12:00PM" clockk={true}/> */}
     <ActionButton text="Save" style={{alignSelf:'center'}} onPress={handlePress}/>
 
     

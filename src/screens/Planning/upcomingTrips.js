@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, SafeAreaView } from "react-native";
 import PlaceCard from "../../components/placeCard";
-import BottomTabNavigator from "../../navigation/bottomTabNavigator";
 
 const UpcomingTrips = () => {
 
@@ -88,9 +87,6 @@ const UpcomingTrips = () => {
           />
 
       </SafeAreaView>
-      <BottomTabNavigator />
-
-
     </View>
   );
 };

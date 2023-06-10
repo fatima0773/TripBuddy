@@ -5,6 +5,7 @@ import PopularPlaces from '../screens/Exploration/popularPlaces';
 import DestinationDetails from '../screens/Exploration/destinationDetails';
 import ProfileScreen from '../screens/onBoarding/profileScreen';
 import New_Trip from '../screens/Planning/PlanTrip';
+import CheckWeather from '../screens/Exploration/checkWeather';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,10 @@ function Exploration() {
       <Stack.Screen
         name="PlanTrip"
         component={New_Trip}
+        options={{ headerShown: false }} />
+      <Stack.Screen
+        name="CheckWeather"
+        component={CheckWeather}
         options={{ headerShown: false }} />
     </Stack.Navigator>
   );

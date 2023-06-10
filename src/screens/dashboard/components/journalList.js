@@ -29,7 +29,7 @@ const JournalList = ({ data }) => {
 const styles = StyleSheet.create({
   container: {
     width: 225,
-    height: 240,
+    height: 200,
     backgroundColor: 'white',
     borderRadius: 10,
     marginLeft: 3,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   imageContainer: {
-    height: 150
+    height: 100
   },
   image: {
     flex: 1,

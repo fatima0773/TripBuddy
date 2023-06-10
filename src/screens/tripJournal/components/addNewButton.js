@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native"
 import colors from "../../styles/colors";
-const AddNewButton = () => {
+const AddNewButton = ({handlePress, navigation}) => {
 	const selectedMode = colors['light'];
 
 	const styles = StyleSheet.create({
@@ -23,7 +23,9 @@ const AddNewButton = () => {
 		}
 	})
 	return (
-		<TouchableOpacity style={styles.addButton}>
+		<TouchableOpacity style={styles.addButton}
+		onPress={handlePress}
+		>
 			<Text style={styles.buttonText}>
 				Add New Note
 			</Text>
