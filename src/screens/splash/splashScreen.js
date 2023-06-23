@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth';
 
 const SplashScreen = () => {
   const bounceAnim = useRef(new Animated.Value(0)).current;
-  const navigation = useNavigation(); // Initialize the navigation object
+  const navigation = useNavigation();
 
   const [userSignedIn, setUserSignedIn] = useState(false);
   useEffect(() => {
