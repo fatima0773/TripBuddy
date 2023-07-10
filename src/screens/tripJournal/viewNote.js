@@ -13,7 +13,7 @@ import {
 import colors from '../styles/colors';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const ViewNote = ({navigation}) => {
+const ViewNote = () => {
   const selectedMode = colors['light'];
   const screenHeight = Dimensions.get('window').height;
 

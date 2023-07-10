@@ -262,7 +262,7 @@ const ViewJournalEntry = ({navigation}) => {
           )}
         </ImageBackground>
       </View>
-      <SafeAreaView style={{paddingBottom: 400}}>
+      <SafeAreaView style={{paddingBottom: 500}}>
       {data.length > 0 ? (
           <FlatList
             data={data}
@@ -273,7 +273,7 @@ const ViewJournalEntry = ({navigation}) => {
                 imageSource={item.imageSource}
                 date={item.date}
                 text={item.text}
-                handlePress={() => {navigation.navigate('View Note')}}
+                handlePress={() => {}}
               />
             )}
           />

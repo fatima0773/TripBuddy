@@ -14,7 +14,7 @@ import {
 import colors from '../styles/colors';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const AddNewNote = ({navigation}) => {
+const NewNote = () => {
   const [value, onChangeText] = useState('');
   const selectedMode = colors['light'];
 
@@ -48,9 +48,7 @@ const AddNewNote = ({navigation}) => {
       <StatusBar backgroundColor="#25605C" />
       <View style={styles.rowContainer}>
         <Text style={styles.heading}>July 17th, 2022</Text>
-        <TouchableOpacity
-        onPress={() => navigation.navigate('View Journal Entry')}
-        >
+        <TouchableOpacity>
           <MaterialIcons
             name="done-outline"
             size={30}
@@ -93,4 +91,4 @@ const AddNewNote = ({navigation}) => {
   );
 };
 
-export default AddNewNote;
+export default NewNote;

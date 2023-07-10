@@ -5,9 +5,28 @@ import auth from '@react-native-firebase/auth';
 
 const SplashScreen = () => {
   const bounceAnim = useRef(new Animated.Value(0)).current;
-  const navigation = useNavigation();
+  const navigation = useNavigation(); // Initialize the navigation object
 
   const [userSignedIn, setUserSignedIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUserSignedIn(true);
+        setTimeout(() => {
+          navigation.navigate('Tab');
+        }, 5000);
+        
+			} else {
+				navigation.navigate('Authentication Screen');
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   useEffect(() => {
     Animated.spring(bounceAnim, {
       toValue: 1,
@@ -22,19 +41,22 @@ const SplashScreen = () => {
         setUserSignedIn(true);
         setTimeout(() => {
           navigation.navigate('Tab');
-        }, 3000);
+        }, 5000);
         
-      } else {
-        setTimeout(() => {
-          navigation.navigate('Intro Screen');
-        }, 3000);
-				
+			} else {
+				navigation.navigate('Authentication Screen');
       }
     });
 
     return () => {
       unsubscribe();
     };
+
+    // const timer = setTimeout(() => {
+    //   navigation.navigate('Tab');
+    // }, 5000);
+
+    // return () => clearTimeout(timer);
   }, [bounceAnim, navigation]);
 
   const styles = StyleSheet.create({
